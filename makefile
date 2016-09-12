@@ -3,10 +3,9 @@ CXX=g++
 RM=rm -f
 CPPFLAGS=-g -std=c++0x 
 
-default: test
-
-test: ./test/ExpressionTester.cpp ./lib/Expression.cpp
+all: 
 	$(CXX) $(CPPFLAGS) -o ./bin/expressionTester ./lib/Expression.cpp ./test/ExpressionTester.cpp
+	$(CXX) $(CPPFLAGS) -o ./bin/CalculatorTester lib/Expression.H lib/Expression.cpp ./lib/Calculator.cpp ./test/CalculatorTester.cpp
     
 clean:
 	$(RM) ./bin/* 

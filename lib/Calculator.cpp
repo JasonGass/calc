@@ -5,10 +5,10 @@ Calculator::Calculator(std::vector<int> bases)
 {
     expression = new Expression("",10);
     state = ValidExpression;
-    Display *newDisplay;
+    CalcDisplay *newDisplay;
     for (int i =0; i < bases.size(); i++)
     {
-        newDisplay = new Display;
+        newDisplay = new CalcDisplay;
         newDisplay->base = bases[i];
         displays.push_back(newDisplay);
     }

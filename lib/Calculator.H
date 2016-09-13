@@ -2,7 +2,7 @@
 #include <vector>
 #include "Expression.H"
 
-struct Display 
+struct CalcDisplay 
 {
     int base;
     std::string text;
@@ -26,5 +26,5 @@ class Calculator
     private: 
         Expression* expression;
         States state;
-        std::vector<Display*> displays;
+        std::vector<CalcDisplay*> displays;
 };

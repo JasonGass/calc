@@ -77,6 +77,12 @@ struct Operator : Token
         ParenthesesPrecedence = 254,
         MaxPrecedence = 255,
     };
+    enum Associativity
+    {
+        Left='L',
+        Right='R',
+    };
+    Associativity associativity;
     Precedences precedence;
     Operators op;
     int numOfOperands;
@@ -88,31 +94,37 @@ struct Operator : Token
         {
             case Addition: 
                 precedence = AdditionSubtractionPrecedence;
+                associativity = Left;
                 numOfOperands=2;
                 break;
 
             case Subtraction: 
                 precedence = AdditionSubtractionPrecedence;
+                associativity = Left;
                 numOfOperands=2;
                 break;
 
             case Multiplication: 
                 precedence = MultiplicationDivisionPrecedence;
+                associativity = Left;
                 numOfOperands=2;
                 break;
 
             case Division: 
                 precedence = MultiplicationDivisionPrecedence;
+                associativity = Left;
                 numOfOperands=2;
                 break;
 
             case LeftParentheses: 
                 precedence = ParenthesesPrecedence;
+                associativity = Right;
                 numOfOperands=0;
                 break;
 
             case RightParentheses: 
                 precedence = ParenthesesPrecedence;
+                associativity = Right;
                 numOfOperands=0;
                 break;
 

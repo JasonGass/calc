@@ -113,6 +113,19 @@ int main()
     test.answerBase10 = "4";
     test.answerBase16 = "4";
     if (!runTest(test)) {failedTests++;}
+
+    //Testing associativity
+    test.expression = "1/10*5";
+    test.base = 10;
+    test.expressionBase02 = "1/1010*101";
+    test.expressionBase08 = "1/12*5";
+    test.expressionBase10 = "1/10*5";
+    test.expressionBase16 = "1/A*5";
+    test.answerBase02 = "0.1";
+    test.answerBase08 = "0.4";
+    test.answerBase10 = "0.5";
+    test.answerBase16 = "0.8";
+    if (!runTest(test)) {failedTests++;}
     
     cout<<failedTests<< " Failed"<<std::endl;
     return 0;

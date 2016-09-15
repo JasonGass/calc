@@ -137,9 +137,12 @@ void solveOp(Operator* op, std::stack<Operand*> &numStack)
     numStack.push(new Operand(op->solve(operands)));
 }
 
-void solveLowerPrecedenceOps(std::stack<Operator*> &opStack, std::stack<Operand*> &numStack, Operator::Precedences precedence)
+void solveLowerPrecedenceOps(std::stack<Operator*> &opStack, std::stack<Operand*> &numStack, Operator::Precedences precedence, Operator::Associativity associativity)
 {
-    while(!opStack.empty() && opStack.top()->precedence < precedence)
+    while(!opStack.empty() && 
+         (opStack.top()->precedence < precedence || 
+         (opStack.top()->precedence == precedence && 
+          associativity == Operator::Left)))
     {
         solveOp(opStack.top(), numStack);
         opStack.pop();
@@ -166,17 +169,17 @@ Expression Expression::solve()
             }
             else if (*op == Operator::RightParentheses)
             {
-                solveLowerPrecedenceOps(opStack, numStack, Operator::ParenthesesPrecedence);
+                solveLowerPrecedenceOps(opStack, numStack, Operator::ParenthesesPrecedence, Operator::Right);
                 opStack.pop();
             }
             else
             {
-                solveLowerPrecedenceOps(opStack, numStack, op->precedence);
+                solveLowerPrecedenceOps(opStack, numStack, op->precedence, op->associativity);
                 opStack.push(op);
             }
         }
     }
-    solveLowerPrecedenceOps(opStack, numStack, Operator::MaxPrecedence);
+    solveLowerPrecedenceOps(opStack, numStack, Operator::MaxPrecedence, Operator::Left);
     if(numStack.size() > 1 ) 
     {
         throw std::invalid_argument("Too many answers");
